@@ -1,0 +1,69 @@
+# Inclass Assignment-2 – COSC 2316 – Professor McCurry
+
+#  Implemented by - RYAN APARICIO
+
+import matplotlib.pyplot as plt
+import numpy as np
+def verifySquare(square):
+    #for keeping track of the sum of columns, rows and diagonals
+    sums = []
+    
+    
+    #determine value of rows
+    #goes through all matrix adding sums or rows
+    rowSums = [sum(square[i]) for i in range (0,len(square))]
+    sums.append(rowSums)
+    
+    #determine value of columns
+    #goes through all the rows and gets the col numbers before change to next col
+    colSums = [sum([row[i] for row in square]) for i in range(0,len(square))]
+    sums.append(colSums)
+    
+    #determine value of first diagonal
+    #goes from the top left to bottom right
+    mainDiag = sum([square[i][i] for i in range(0,len(square))])
+    sums.append([mainDiag])
+    
+    #determine value of second diagonal
+    #goes from top right to bottom left
+    antiDiag = sum([square[i][len(square) -1 -i ] for i in range(0,len(square))])
+    sums.append([antiDiag])
+    
+    #convert sums list intoa  single row list
+    #turns 2d array into 1 d array
+    flattened = [j for i in sums for j in i]
+    
+    #removes any duplicates
+    setFlat = set(flattened)
+    
+    #convert set to a list
+    listFlat = list(setFlat)
+    
+    #determine how many unique values are in the list
+    lenListFlat = len(listFlat)
+    
+    #if the result is anything other than 1 it is not a magic square
+    isMS = (lenListFlat == 1 )
+    #isMS = (len(list(set(flattened))) == 1) 
+    print("The square entered is a magic square: ", isMS)
+    
+    
+
+def main():
+    luoshu = [[4,9,2],[3,5,7],[8,1,6]]
+    examp2_4 = [[8,11,14,1], [13,2,7,12], [3,16,9,6], [10,5,4,15]]
+    examp3_5 = [[17,24,1,8,15],
+                [23,5,7,14,16],
+                [4,6,13,20,22],
+                [10,12,19,21,3],
+                [11,18,25,2,9]]
+    
+    not_a_MS = [[1,2,3],[4,5,6],[7,8,9]]
+    #verifySquare(luoshu)
+    #verifySquare(examp2_4)
+    #verifySquare(examp3_5)
+    verifySquare(not_a_MS)
+    
+
+if __name__ == '__main__':
+    main()

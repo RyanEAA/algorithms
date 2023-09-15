@@ -1,0 +1,51 @@
+import numpy as np
+import matplotlib.pylab as plt
+
+N = 50 # number of subjects
+#M = 10
+
+#xs = np.random.randn(M,N)
+#ws = np.random.randn(M)
+#ys = ws @ xs
+
+#x is feature for 50 subjects
+x1 = np.random.randn(N)
+
+#noise can represent other thing which are present
+x2 = x1 + np.random.randn(N)
+
+#constant is the effect of x on y
+#x can equal body mass
+#y can equal blood sugar level
+#constant is w which is the constant
+#if you can measure constant you should be able 
+#to perfectly predict 
+#rgoing to remove effect of x2 on x1
+#wx is effect of x2 on x1 using lease square
+#uses wx and x2 to predict x1
+#ex is mismatched from true x1 and prediced x1
+#ex1 represents x1 without effects of x2
+#x1 and x2 are independent variables which are not correlated
+
+y = 3 * x1 + 0.5* x2
+
+wx = np.sum(x1 * x2) / np.sum(x2 * x2)
+px1 = wx *x2
+ex1 = x1 - px1
+w1 = np.sum(y * ex1)/np.sum(ex1 * ex1)
+
+
+wx = np.sum(x2 * x1) / np.sum(x1 * x1)
+px2 = wx *x1
+ex2 = x2 - px2
+w2 = np.sum(y * ex2)/np.sum(ex2  * ex2)
+
+
+print("solution", w1, w2)
+
+pred = w1 * x1 + w2 * x2
+
+plt.plot(y)
+plt.plot(pred)
+plt.legend(["truth", "prediction"])
+plt.show()

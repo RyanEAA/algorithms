@@ -1,0 +1,38 @@
+#imports the math and panda lab
+import math
+import pandas as pd
+
+n1 = 86  #bigger value for halving
+n2 = 34  #smaller value for doubling
+
+#starts the halving list with the bigger value
+halving = [n1]
+
+#the loop continues until the halving value is no longer greather than 1
+while (min(halving) > 1):
+    #the value that gets halved gets appeneded to the halving list
+    halving.append(math.floor(min(halving) / 2))
+
+#starts the doubling list with the bigger value
+doubling = [n2]
+
+#the loops continues until the doubling list is the same as the halving list
+while (len(doubling) < len(halving)):
+    #this just appends the value that gets halved to the doubling list
+    doubling.append(max(doubling) * 2)
+
+#this pd.DataFrame combines both arrays into a two dimensional data table
+half_double = pd.DataFrame(zip(halving, doubling))
+
+
+#this grabs  the first coloumn values containing the halved values
+#it also makes sure that the values it's grabbing are odd which is based on the RPM algorithm
+half_double = half_double.loc[half_double[0] % 2 == 1, :]
+
+
+#this calculates the sum, based of the second coloumn of the half_doubble double list
+answer = sum(half_double.loc[:, 1])
+
+print("n1:", n1, ", n2:", n2)
+#just prints the result
+print("The answer using rpm is", answer)
