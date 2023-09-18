@@ -1,0 +1,86 @@
+#this model serves as an adaptive filter
+#to cancel data
+import numpy as np
+import matplotlib.pylab as plt
+
+N = 200
+t = np.arange(0.0001, 1.001, 0.001)
+data = 2 * np.sin(2 * np.pi * 50 * t)
+ys = data[:N]
+
+
+#this just add "noise" to the data which the model learns to predict
+#later on
+for i in range(1, N, 2):
+     #this adds an arbitrary number to the data
+    ys[i] = 1
+
+
+#adding more noise
+#model does great until ys[100] 
+for i in range(1, N, 4):
+    ys[i] = -1
+
+ys[70] = 2
+ys[150] = 2
+
+M = 20
+f = np.zeros(M)
+b = np.zeros(M)
+t = np.zeros(M)
+wf = np.zeros(M)
+wb = np.zeros(M)
+
+fb = np.zeros(M)
+ff = np.zeros(M) + 0.000001
+bb = np.zeros(M) + 0.000001
+e = np.zeros(N)
+
+pred = np.zeros(N)
+act = np.zeros((M,N))
+for n in range(N):
+    
+    pred[n] = wf @ b
+    
+    f[0] = ys[n]
+    t[0] = ys[n]
+    
+    for m in range(M-1):
+        
+        ff[m] += f[m] * f[m]
+        bb[m] += b[m] * b[m]
+        fb[m] += f[m] * b[m]
+        
+        
+        wb[m] = fb[m] / ff[m]
+        wf[m] =  fb[m] / bb[m]
+        
+        ef = f[m] - wf[m] * b[m]
+        eb = b[m] - wb[m] * f[m]
+        
+        f[m + 1] = ef
+        t[m + 1] = eb
+        
+    b = t.copy()
+    e[n] = f[-1]
+    act[:, n] = f
+
+plt.figure(3)
+plt.title  
+plt.imshow(np.flipud(np.abs(act)))
+    
+    
+    
+plt.figure(1)
+plt.plot(ys)
+plt.plot(pred)
+plt.legend(["data", "prediction" ])
+
+plt.figure(2)
+plt.title("Error")
+plt.plot(e)
+
+
+plt.show()
+
+#error goes to 0 as model learns to predict data
