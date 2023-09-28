@@ -24,6 +24,9 @@ for i in range(1, N, 4):
 ys[70] = 2
 ys[150] = 2
 
+#activity level goes up at ys[70] and ys[150] as the model isn't
+#able to predict the data at those two points
+
 M = 20
 f = np.zeros(M)
 b = np.zeros(M)
