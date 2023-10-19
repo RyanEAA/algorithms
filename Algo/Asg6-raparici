@@ -1,0 +1,27 @@
+# Assignment-6 – COSC 2316-01 – Professor McCurry
+
+#  Implemented by - Your name
+
+#test data
+nameArray1 = ["Idril", "Elbereth", "Galadriel", "Lthien", "Celeborn", "Nimloth", "Varda", "Elwing", "Finarfin", "Galadriel"]
+nameArray2 = ["Shari", "Mada", "Katti", "Katta", "Valaree", "Callida", "Hunfredo", "Kali", "Paulina", "Alisha"]
+nameArray3 = ["Rockey", "Gracie", "Salem", "Roselia", "Brenna", "Robert", "Valenka", "Pippa", "Verge", "Esra"]
+
+#print(nameArray1)
+
+def sortArrayAlphabetically(nameArray):
+    #implement your code here
+    for word in nameArray:
+        for i in range(len(nameArray)-1): #we are going to compare the letters in the words
+            if nameArray[i] > nameArray[i+1]: #if the first letter of the first word is greater than the first letter of the second word
+                nameArray[i], nameArray[i+1] = nameArray[i+1], nameArray[i] #we are going to swap the words
+    return nameArray
+
+print("Unsorted Array: ", nameArray1)
+print("Sorted Array: ", sortArrayAlphabetically(nameArray1))
+
+print("Unsorted Array: ", nameArray2)
+print(sortArrayAlphabetically(nameArray2))
+
+print("Unsorted Array: ", nameArray3)
+print(sortArrayAlphabetically(nameArray3))

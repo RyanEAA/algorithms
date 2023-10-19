@@ -1,0 +1,27 @@
+import numpy as np
+
+#function y(x)
+def cost_function(x):
+    return (x + 764)**2 + 3*x - 500
+
+# Define the gradient of the cost function
+def gradient(x): # it's the derivative of the function
+    return 2*(x + 764) + 3
+
+# Gradient Descent parameters
+learning_rate = 0.01  # Adjust the learning rate as needed
+iterations = 1000000    # Number of iterations
+
+# Initial guess for x
+x = 0.0
+
+# Gradient Descent optimization
+for i in range(iterations):
+    gradient_x = gradient(x)
+    x = x - learning_rate * gradient_x #updating x 
+    #we are subtracting because we are trying to find the minimum
+
+# Print the result
+min_x = x
+min_y = cost_function(min_x)
+print(f"Minimum at x = {min_x}, y = {min_y}")
