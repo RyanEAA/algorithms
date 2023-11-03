@@ -1,0 +1,56 @@
+import random
+import matplotlib.pyplot as plt
+
+def merging(left_cabinet, right_cabinet):
+    left_cabinet = mergesort(left_cabinet)
+    right_cabinet = mergesort(right_cabinet)
+    new_cabinet = []
+
+    while min(len(left_cabinet), len(right_cabinet)) > 0:
+        if left_cabinet[0] > right_cabinet[0]:
+            to_insert = right_cabinet.pop(0)
+            new_cabinet.append(to_insert)
+        elif left_cabinet[0] <= right_cabinet[0]:
+            to_insert = left_cabinet.pop(0)
+            new_cabinet.append(to_insert)
+
+    if len(left_cabinet) > 0:
+        for i in left_cabinet:
+            new_cabinet.append(i)
+
+    if len(right_cabinet) > 0:
+        for i in right_cabinet:
+            new_cabinet.append(i)
+
+    return new_cabinet
+
+step_counter = 0  # Initialize the step counter
+
+def mergesort(cabinet):
+    global step_counter
+    if len(cabinet) == 1:
+        return cabinet
+    else:
+        left_cabinet = mergesort(cabinet[:len(cabinet) // 2])
+        right_cabinet = mergesort(cabinet[len(cabinet) // 2:])
+        step_counter += len(cabinet)  # Count the steps here
+        return merging(left_cabinet, right_cabinet)
+
+def count_steps(n):
+    global step_counter
+    step_counter = 0
+    cabinet = [int(1000 * random.random()) for i in range(n)]
+    mergesort(cabinet)
+    return step_counter
+
+def plot_steps_vs_size():
+    sizes = list(range(1, 100))
+    steps = [count_steps(n) for n in sizes]
+
+    plt.plot(sizes, steps, marker='o')
+    plt.title("Merge Sort Steps vs. Number of Elements")
+    plt.xlabel("Number of Elements")
+    plt.ylabel("Number of Steps")
+    plt.show()
+
+plot_steps_vs_size()

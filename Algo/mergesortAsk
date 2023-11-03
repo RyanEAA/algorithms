@@ -1,0 +1,42 @@
+def mergesortInv(list, mergeInv):
+    if len(list) < 2:
+        return list, 0
+    else:
+        middle = len(list) // 2
+        left, lc = mergesortInv(list[:middle], mergeInv)   #definim les dues meitats
+        right, rc = mergesortInv(list[middle:], mergeInv)
+    merge, mc = mergeInv(left, right)
+    return merge, lc + rc + mc
+
+def mergeInvRec(left, right):
+    if len(left) < 1:
+        return right, 0
+    if len(right) < 1:
+        return left, 0
+    if left[0] <= right[0]:
+        res, cnt = mergeInvRec(left[1:], right)
+        return [left[0]] + res, cnt
+    else:
+        res, cnt = mergeInvRec(left, right[1:])
+        return [right[0]] + res, len(left) + cnt
+
+def mergeInvFlat(left, right):
+    res, cnt = [], 0
+    il, ir = 0, 0
+    nl, nr = len(left), len(right)
+    while il < nl and ir < nr:
+        if left[il] <= right[ir]:
+            res.append(left[il])
+            il += 1
+        else:
+            res.append(right[ir])
+            ir += 1
+            cnt += nl - il
+    res.extend(left[il:])
+    res.extend(right[ir:])
+    return res, cnt
+
+
+cabinet = [12,5,2,5,3,1,2]
+
+print(mergesortInv(cabinet, mergeInvFlat))
