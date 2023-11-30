@@ -1,0 +1,51 @@
+# Assignment-9 – COSC 2316-01 – Professor McCurry
+
+#  Implemented by - Ryan Aparicio
+def openAndCollectNames(file_name):
+    try:
+        with open(file_name, 'r') as file:
+            text = file.read()
+            words = text.split()
+            return words  # Return the words obtained from the file
+    except FileNotFoundError:
+        print(f"File '{file_name}' not found.")
+        return []  # Return an empty list if the file is not found
+    except Exception as e:
+        print("An error occurred:", e)
+        return []  # Return an empty list in case of an error
+
+file_name = "50FirstNames.txt"
+words = openAndCollectNames(file_name)
+
+#for names in words:
+#    print(names)
+    
+def sortArrayAlphabeticallyBubbleSort(nameArray):
+    n = len(nameArray)
+    # Traverse through all elements in the list
+    for i in range(n):
+        # Last i elements are already in place, so no need to check them
+        for j in range(0, n-i-1):
+            # Swap if the element found is greater than the next element
+            if nameArray[j] > nameArray[j+1]:
+                nameArray[j], nameArray[j+1] = nameArray[j+1], nameArray[j]
+
+    return nameArray
+
+sortedArray = sortArrayAlphabeticallyBubbleSort(words)
+
+# for name in sortedArray:
+#     print(name)
+    
+    
+def countInstances(targetName, nameArray):
+    countOfTargetName = 0 #count starts at 0
+    for names in nameArray:# for each name in the array
+        if names == targetName:# if the name is equal to the target name
+            countOfTargetName += 1 # add 1 to the count
+    return countOfTargetName# return the count
+
+targetName = "Joseph" #the target name is Joseph
+
+#print the target name and the number of times it appears in the array
+print("The name", targetName, " appears", countInstances(targetName, sortedArray), "times.") 
