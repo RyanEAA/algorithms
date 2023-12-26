@@ -7,7 +7,7 @@ def shadow_sort_two(original_list):
     sorted_list = [None] * (max(original_list))
     
     for i in range(len(original_list)):
-        print(original_list[i])
+ 
         sorted_list[original_list[i]-1] = original_list[i]
         
 
@@ -20,7 +20,7 @@ def time_shadow_sort_two():
     setup_code = """
 from __main__ import shadow_sort_two
 import random
-my_list = [random.randint(1, 100) for _ in range(10)]
+my_list = [random.randint(1, 100) for _ in range(50)]
     """
 
     stmt = "shadow_sort_two(my_list.copy())"
