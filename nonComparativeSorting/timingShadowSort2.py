@@ -20,7 +20,7 @@ def time_shadow_sort_two():
     setup_code = """
 from __main__ import shadow_sort_two
 import random
-my_list = [random.randint(1, 100) for _ in range(50)]
+my_list = [random.randint(10000000, 20000000) for _ in range(100000)]
     """
 
     stmt = "shadow_sort_two(my_list.copy())"
