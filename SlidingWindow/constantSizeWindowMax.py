@@ -1,4 +1,4 @@
-#find the maximum sum sub array of required size
+# find the maximum sum sub array of required size
 # time complexity o(n)
 # space complexity o(1)
 # can be used for finding minimum

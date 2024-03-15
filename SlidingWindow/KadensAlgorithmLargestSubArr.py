@@ -28,7 +28,7 @@ class Solution():
             
             r+=1
             
-        return lar_sub, l, r
+        return lar_sub
 
 #sub_sol, l_ind, r_index = 
 print(Solution().kadensAlgoLargSumSub(nums))
