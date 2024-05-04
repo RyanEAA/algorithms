@@ -79,4 +79,6 @@ def build_electronic_tree():
 if __name__ == '__main__':
     root = build_electronic_tree()
     root.print_tree("both")
+    root.print_tree("name")
+    root.print_tree("title")
     #print(root.get_level())

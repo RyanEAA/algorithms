@@ -13,8 +13,19 @@ class Solution():
         for i in range(len(arr)):
             curr_sum += (-1 if arr[i] == 0 else 1)
             #print(curr_sum)
-            if curr_sum == 0:
-                print(i)
+            if curr_sum not in dict:
+                # sum is getting added with the value being saved being the index
+                dict[curr_sum] = i
+            if curr_sum in dict:
+                print(curr_sum)
+                #get size of current largest sub
+                if(len(arr[dict[curr_sum]: i]) > len(largest_sub)):
+                    largest_sub = arr[dict[curr_sum]: i]
+                    print(largest_sub)
+                    print(dict[curr_sum], i)
+                    print(curr_sum)
+        #print(largest_sub)
+        #print(dict)
         
         
         
